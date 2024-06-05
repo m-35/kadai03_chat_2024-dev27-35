@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase_version9_RealtimeDB(G'sACADEMY初学者用サンプル)</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style TYPE="text/css">
+      body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: black;
+      }
+      body
+      #tate {
+ writing-mode: sideways-lr;
+}
+#neon-board {
+  border-radius: 0.5em;
+  box-shadow: -1px -1px rgb(129, 250, 133), 1px -1px rgb(129, 250, 133),
+    1px 1px rgb(129, 250, 133), -1px 1px rgb(129, 250, 133),
+    0 0 0.1em rgb(129, 250, 133), 0 0 0.1em rgb(129, 250, 133) inset,
+    0 0 0.5em rgb(129, 250, 133), 0 0 0.5em rgb(129, 250, 133) inset,
+    0 0 1em rgb(129, 250, 133), 0 0 1em rgb(129, 250, 133);
+  margin: 100px;
+  padding: 10px;
+}
+#neon {
+  color: rgb(218, 74, 98);
+  font-family: "Grand Hotel", fantasy;
+  font-style: italic;
+  text-shadow: 0 0 0.1em rgb(218, 74, 98), 0 0 0.1em rgb(218, 74, 98),
+    0 0 0.1em rgb(218, 74, 98), 0 0 0.5em rgb(218, 74, 98),
+    0 0 1em rgb(218, 74, 98);
+  -moz-transition: text-shadow 1s;
+  -ms-transition: text-shadow 1s;
+  -o-transition: text-shadow 1s;
+  -webkit-transition: text-shadow 1s;
+  transition: text-shadow 1s;
+}
+      #wrapper {
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
+        overflow: hidden;
+        position: fixed;
+        transform: rotateY( 180deg );
+        background-color: black;
+      }
+      #flex-container {
+        position: absolute;
+        top: 0;
+        color: white;
+        right: 20px;
+        left: 20px;
+        background-color: black;
+      }
+    </style>
+    <script type="text/javascript" src="./matrix.js"></script>
+</head>
+
+<body style=margin:0 onload="for (s = window.screen, w = q.width = s.width, h = q.height = s.height, m = Math.random, p = [], i = 0; i < 256; p[i++] = 1); setInterval('9Style=\'rgba(0,0,0,.05)\'9Rect(0,0,w,h)9Style=\'#0F0\';p.map(function(v,i){9Text(String.fromCharCode(3e4+m()*33),i*10,v);p[i]=v>758+m()*1e4?0:v+10})'.split(9).join(';q.getContext(\'2d\').fill'), 33)">
+  
+  <header>
+     <div id="neon-board tate">
+          <h1 id="neon">エンジニア向け学習中の人川柳</h1>
+     </div>
+  </header>
+
+  <main>
+    <div id="wrapper">
+        <canvas id="q"></canvas> 
+    </div>
+
+    <!-- コンテンツ表示画面 -->
+    <div id="flex-container">
+    <!-- style.cssに "overflow: auto;"を書いてみましょう！※最後に -->
+        <div id="output"></div>
+        <!-- 各場所にidを設定しましょう -->
+        <!-- ②idやclassの設定 -->
+        <div id="input">
+            <input type="text" id="cara5-01" placeholder="「上五」５文字で入力してください">
+            <input type="text" id="cara7" placeholder="「中七」７文字で入力してください">
+            <input type="text" id="cara5-02" placeholder="「下五」５文字で入力してください">
+            <input type="text" id="uname" placeholder="byを付けて名前を入力してください">
+            <select id="selectImg" required>
+                <option value="img00">--合いの手スタンプ--</option>
+                <option value="img01">どーしたどした</option>
+                <option value="img02">それからどした</option>
+                <option value="img03">もっともだぁもっともだ</option>
+                <option value="img04">エンヤートット</option>
+             </select>
+              <ul>
+                <li id="img00">
+                  <img src="img/img00.jpg" alt="-選択してください-" width="300" height="60">
+                </li>
+                <li id="img01">
+                  <img src="img/img01.jpg" alt="どーしたどした" width="300" height="60" >
+                </li>
+                <li id="img02">
+                  <img src="img/img02.jpg" alt="それからどした" width="300" height="60">
+                </li>
+                <li id="img03">
+                  <img src="img/img03.jpg" alt="もっともだぁもっともだ" width="300" height="60">
+                </li>
+                <li id="img04">
+                  <img src="img/img04.jpg" alt="エンヤートット" width="300" height="60">
+                </li>
+              </ul>
+              <!-- あとで画像サイズ縮小 -->
+<!--     <li id="img00">
+      <img src="img/img00.jpg" alt="" width="250" height="50">
+    </li> -->
+        <button id="send">☢デプロイ</button>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+// <!--画像選択のjs -->
+    <script>
+    $(function(){
+    $('#selectImg').change(function () {
+        //選択したoptionのvalueを取得
+        var val = $(this).val();
+        //先頭に#を付けてvalueの値をidに変換
+        var selectImgId = '#' + val;
+        //一度すべてのブロックを非表示にする
+        $('ul li').hide();
+        //選択したブロックのみを表示
+        $(selectImgId).show();
+    });
+    });
+    </script>
+
+    <!-- // 授業でやったとこ（まだ画像部分やってない） -->
+    <!-- Import the functions you need from the SDKs you need -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+        import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved }
+            from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
+        // Your web app's Firebase configuration
+        // ①ファイヤベースの設定
+        const firebaseConfig = {
+            apiKey: ,
+            authDomain: ,
+            databaseURL: ,
+            projectId:,
+            storageBucket:,
+            messagingSenderId:,
+            appId:
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app); //RealtimeDBに接続
+        const dbRef = ref(db, "chat"); //RealtimeDB内の"chat"を使う
+
+        //③データ登録(Click)
+        $("#send").on('click',function(){
+           const cara501 = $("#cara5-01").val();
+           const cara7 = $("#cara7").val();
+           const cara502 = $("#cara5-02").val();
+           const uname = $("#uname").val();
+           const selectImg = $("#selectImg").val();
+           
+            // ③ー１表示の確認
+            console.log(uname,'名前')
+            console.log(cara501,'先の５文字')
+            console.log(cara7,'中の７文字')
+            console.log(cara502,'後の５文字')
+
+        // new④送信データのロッカーをつくる
+            const msg = {
+                cara501: $("#cara5-01").val(),
+                cara7: $("#cara7").val(),                
+                cara502: $("#cara5-02").val(),                              
+                uname: $("#uname").val(),
+                selectImg: $("#selectImg").val(),
+            }
+
+        // new④ー１ロッカーのデータの送信処理 firebaseに送る準備をする
+            const newPostRef = push(dbRef)
+            set(newPostRef,msg)
+
+        // 送信後に空欄にする
+            $("#cara5-01").val("");
+            $("#cara7").val("");
+            $("#cara5-02").val("");
+            $("#uname").val("");
+
+
+        // この下は消さない
+        });
+        //データ登録(Enter)
+
+        // new⑤ 最初にデータ取得＆onSnapshotでリアルタイムにデータを取得
+        onChildAdded(dbRef,function(data){
+            const msg = data.val();
+            console.log(msg,'データの中身')
+            const key = data.key;
+            console.log(key,'鍵の名前')
+            // htmlとして埋め込むためテンプレートリテラル
+            let html = `
+                <div class="msg">
+                    <p>${msg.cara501}</p>
+                    <p>${msg.cara7}</p>
+                    <p>${msg.cara502}</p>
+                    <p>${msg.uname}</p>
+                </div>
+            `
+            $("#output").append(html);
+        })
+
+        
+        //⑥データ登録(Enter)
+        $("#text").on("keydown", function (e) {
+            console.log(e);        //e変数の中身を確認！！
+            if (e.keyCode == 13) {   //EnterKey=13
+                const msg = {
+                    cara501: $("#cara5-01").val(),
+                    cara7: $("#cara7").val(),                
+                    cara502: $("#cara5-02").val(), 
+                    uname: $("#uname").val(),
+                    selectImg: $("#selectImg").val(),
+                }
+                const newPostRef = push(dbRef); //ユニークKEYを生成
+                set(newPostRef, msg);           //"chat"にユニークKEYをつけてオブジェクトデータを登録
+            }
+        });
+
+    </script>
+    </main>
+</body>
+
+</html>

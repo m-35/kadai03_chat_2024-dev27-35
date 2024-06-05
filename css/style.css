@@ -1,0 +1,198 @@
+* {
+  box-sizing: border-box;
+}
+
+header{
+  margin: auto;
+  padding: 1px;
+  background-color: black;
+}
+
+h1 {
+  text-align: center;
+  margin: 25px 0;
+  font-size: 35px;
+  background-color: black
+  ;
+}
+/* ネオン */
+#tate {
+ writing-mode: sideways-lr;
+}
+#neon-board {
+  border-radius: 0.5em;
+  box-shadow: -1px -1px rgb(129, 250, 133), 1px -1px rgb(129, 250, 133),
+    1px 1px rgb(129, 250, 133), -1px 1px rgb(129, 250, 133),
+    0 0 0.1em rgb(129, 250, 133), 0 0 0.1em rgb(129, 250, 133) inset,
+    0 0 0.5em rgb(129, 250, 133), 0 0 0.5em rgb(129, 250, 133) inset,
+    0 0 1em rgb(129, 250, 133), 0 0 1em rgb(129, 250, 133);
+  margin: 100px;
+  padding: 10px;
+}
+#neon {
+  color: rgb(218, 74, 98);
+  font-family: "Grand Hotel", fantasy;
+  font-style: italic;
+  text-shadow: 0 0 0.1em rgb(218, 74, 98), 0 0 0.1em rgb(218, 74, 98),
+    0 0 0.1em rgb(218, 74, 98), 0 0 0.5em rgb(218, 74, 98),
+    0 0 1em rgb(218, 74, 98);
+  -moz-transition: text-shadow 1s;
+  -ms-transition: text-shadow 1s;
+  -o-transition: text-shadow 1s;
+  -webkit-transition: text-shadow 1s;
+  transition: text-shadow 1s;
+}
+/* ネオン */
+
+#flex-container{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 150px;
+  padding-right: 0;
+}
+
+
+input {
+  width: 400px;
+  padding: 5px;
+  display: block;
+  margin: 0 auto 30px;
+  font-size: 16px;
+}
+
+#selectImg {
+  width: 200px;
+  height: 30px;
+  margin: 0 auto 0px;
+  display: block;
+}
+
+#send {
+  width: 130px;
+  height: 60px;
+  margin: 40px 200px 20px;
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: yellow;
+}
+
+#send:hover{
+  transform: scale(1.1, 1.1);
+}
+
+
+#input {
+  width: 500px;
+  display: block;
+  height: 500px;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+  border-radius: 8px;
+  padding: 30px;
+  padding-bottom: 0;
+}
+
+#img00{
+  margin-top: 5px;
+  display: center;
+  padding-top: 0;
+  padding-left: 120px;
+}
+
+#img01{
+  margin-top: 5px;
+  display: center;
+  padding-top: 0;
+  padding-left: 120px;
+}
+
+#img02{
+  margin-top: 5px;
+  display: center;
+  padding-top: 0;
+  padding-left: 120px;
+}
+
+#img03{
+  margin-top: 5px;
+  display: center;
+  padding-top: 0;
+  padding-left: 120px;
+}
+
+#img04{
+  margin-top: 5px;
+  display: center;
+  padding-top: 0;
+  padding-left: 120px;
+}
+
+
+#output {
+  width: 600px;
+  display: block;
+  height: 500px;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 19px ;
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size:cover;
+  overflow: auto;
+}
+
+.msg:nth-child(even) {
+  margin-left: auto;
+  width: 200px;
+  height: 110px;
+  margin-top: 10px;
+  border: 1px solid pink;
+  box-shadow: -1px -1px rgb(129, 250, 133), 1px -1px rgb(129, 250, 133),
+  1px 1px rgb(129, 250, 133), -1px 1px rgb(129, 250, 133),
+  0 0 0.1em rgb(129, 250, 133), 0 0 0.1em rgb(129, 250, 133) inset,
+  0 0 0.5em rgb(129, 250, 133), 0 0 0.5em rgb(129, 250, 133) inset,
+  0 0 1em rgb(129, 250, 133), 0 0 1em rgb(129, 250, 133);
+  padding: 10px;
+  border-radius: 6px;
+  background: black;
+}
+
+.msg:nth-child(odd) {
+  margin-right: auto;
+  width: 200px;
+  height: 110px;
+  margin-top: 10px;
+  border: 1px solid blue;
+  box-shadow: -1px -1px rgb(129, 250, 133), 1px -1px rgb(129, 250, 133),
+  1px 1px rgb(129, 250, 133), -1px 1px rgb(129, 250, 133),
+  0 0 0.1em rgb(129, 250, 133), 0 0 0.1em rgb(129, 250, 133) inset,
+  0 0 0.5em rgb(129, 250, 133), 0 0 0.5em rgb(129, 250, 133) inset,
+  0 0 1em rgb(129, 250, 133), 0 0 1em rgb(129, 250, 133);
+  padding: 10px;
+  border-radius: 6px;
+  background: black;
+}
+
+/* 画像リスト部分 */
+ul li:nth-of-type(n+2){ display: none; }
+
+/* テスト③リストの黒点消す */
+ul{
+  padding-left:0;
+}
+
+li{
+  list-style:none;
+}
+
+#selectImag{
+  width: 80px;
+  height: 10px;
+}
+
+
+
+
